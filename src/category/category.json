@@ -1,0 +1,25 @@
+{
+  "list": [
+    {
+      "id": "094utwsdf",
+      "name": "大家电",
+      "children": [
+        {
+          "id": "ohwejfosd",
+          "name": "中外名酒",
+          "children": [
+            {
+              "id": "092uewfs",
+              "name": "啤酒"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2tw9efsd",
+      "name": "热门推荐",
+      "children": []
+    }
+  ]
+}

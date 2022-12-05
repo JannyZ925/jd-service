@@ -12,8 +12,6 @@ import { AppService } from './app.service';
 interface BannerQuery {
   heihei: string;
 }
-
-@ApiTags('应用')
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}

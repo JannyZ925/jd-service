@@ -20,4 +20,7 @@ export class GoodsDetail {
 export class GetGoodsListResponse {
   @ApiProperty()
   list: GoodsDetail[];
+
+  @ApiProperty()
+  total: number;
 }

@@ -1,4 +1,6 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateGoodDto } from './create-good.dto';
+import { ApiProperty } from '@nestjs/swagger';
 
-export class UpdateGoodDto extends PartialType(CreateGoodDto) {}
+export class UpdateGoodsDto {
+  @ApiProperty()
+  id: number;
+}

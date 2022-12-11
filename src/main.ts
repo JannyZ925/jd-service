@@ -1,12 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { EntryModule } from './entry.module';
+import { ResponseInterceptor } from './shared/interceptors/response.interceptor';
 
 const PORT = 5200;
 
 async function bootstrap() {
   const app = await NestFactory.create(EntryModule);
   app.setGlobalPrefix('/api/jd-service');
+  app.useGlobalInterceptors(new ResponseInterceptor());
 
   const config = new DocumentBuilder()
     .setTitle('JD Service API Docs')

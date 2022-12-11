@@ -1,6 +1,6 @@
 import { Controller, Get, Put, Query, Body, Post } from '@nestjs/common';
 import { HomeService } from './home.service';
-import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { GetHomeResponse } from './entities/home.entity';
 
 @ApiTags('首页')
@@ -19,13 +19,12 @@ export class HomeController {
   }
 
   @ApiOperation({ summary: '更新首页瀑布流数据' })
-  @ApiOkResponse({
-    description: '更新首页瀑布流数据',
+  @ApiBody({
     type: GetHomeResponse,
+    description: '需要更新的数据',
   })
   @Post()
   updateHomeData(@Body() data: any) {
-    console.log('data', typeof data, data)
     return this.homeService.updateData(data);
   }
 }

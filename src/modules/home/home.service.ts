@@ -11,7 +11,7 @@ export class HomeService extends BaseService {
   }
 
   async updateData(data: any) {
-    const result = await this.store.put(`home.json`, data);
-    return result;
+    await this.store.put(`home.json`, data);
+    return true;
   }
 }

@@ -3,15 +3,22 @@ import { BaseService } from 'src/shared/services/base.service';
 
 @Injectable()
 export class HomeService extends BaseService {
-  async findAll(refresh: 0 | 1) {
-    const result = await this.store.get(`home.json`);
+
+  async getBannerList() {
+    const result = await this.store.get(`home/bannerList.json`);
     const data = JSON.parse(result.res.data.toString());
-    data.refresh = refresh;
     return data;
   }
 
-  async updateData(data: any) {
-    await this.store.put(`home.json`, data);
-    return true;
+  async getMenuList() {
+    const result = await this.store.get(`home/menuList.json`);
+    const data = JSON.parse(result.res.data.toString());
+    return data;
+  }
+
+  async getFloorList() {
+    const result = await this.store.get(`home/floorList.json`);
+    const data = JSON.parse(result.res.data.toString());
+    return data;
   }
 }

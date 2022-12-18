@@ -8,32 +8,45 @@ export class Menu {
   title: string;
 
   @ApiProperty()
-  icon: string;
-
-  @ApiProperty()
-  link: string;
+  imageUrl: string;
 }
 
 export class Banner {
   @ApiProperty()
-  id: string;
+  goodsId: string;
 
   @ApiProperty()
-  imgUrl: string;
+  imageUrl: string;
+}
+
+export class FloorTitle {
+  @ApiProperty()
+  name: string;
+
+  @ApiProperty()
+  imageUrl: string;
+}
+
+export class Product {
+  @ApiProperty()
+  name: string;
+
+  @ApiProperty()
+  imageUrl: string;
+
+  @ApiProperty()
+  imageWidth: string;
+
+  @ApiProperty()
+  link: string;
 }
 
 export class Floor {
   @ApiProperty()
-  id: string;
+  floorTitle: FloorTitle;
 
   @ApiProperty()
-  layoutType: 1 | 2;
-
-  @ApiProperty()
-  icon: string;
-
-  @ApiProperty()
-  link: string;
+  productList: Product[];
 }
 
 export class GetHomeResponse {
@@ -45,7 +58,4 @@ export class GetHomeResponse {
 
   @ApiProperty()
   floors: Floor[];
-
-  @ApiProperty()
-  refresh: 0 | 1;
 }

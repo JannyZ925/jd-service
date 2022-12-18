@@ -16,7 +16,7 @@ export class CategoryController {
     type: CategoryTree,
   })
   @Get()
-  findAll() {
-    return this.categoryService.findAll();
+  getCategoryList() {
+    return this.categoryService.getCategoryList();
   }
 }

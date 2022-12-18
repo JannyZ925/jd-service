@@ -2,8 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CategoryItem {
   @ApiProperty()
-  id: string;
-  name: string;
+  catId: number;
+  catName: string;
+  catImage: string;
   children: CategoryItem[];
 }
 

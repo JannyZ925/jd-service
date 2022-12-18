@@ -1,14 +1,13 @@
 import { Injectable } from '@nestjs/common';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const superagent = require('superagent');
+import { BaseService } from 'src/shared/services/base.service';
 
 @Injectable()
-export class CategoryService {
-  async findAll() {
-    const res = await superagent.get(
-      'https://lexmin.oss-cn-hangzhou.aliyuncs.com/apis/service-data/category.json',
-    );
-    const data = res.body;
+export class CategoryService extends BaseService{
+
+  async getCategoryList() {
+    const result = await this.store.get(`categoryList.json`);
+    const data = JSON.parse(result.res.data.toString());
     return data;
   }
+
 }

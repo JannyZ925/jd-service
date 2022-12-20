@@ -1,28 +1,64 @@
-import { Body, Controller, Get, Put, Param } from '@nestjs/common';
+import { Body, Controller, Get, Put, Param, Query } from '@nestjs/common';
 import { GoodsService } from './goods.service';
 import {
   ApiBody,
   ApiOkResponse,
   ApiOperation,
   ApiParam,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { GetGoodsListResponse, GoodsDetail } from './entities/good.entity';
 import { UpdateGoodsDto } from './dto/update-good.dto';
+import { GetGoodsDto } from './dto/get-goods.dto';
 
 @ApiTags('商品')
 @Controller('goods')
 export class GoodsController {
-  constructor(private readonly goodsService: GoodsService) {}
+  constructor(private readonly goodsService: GoodsService) { }
 
-  @ApiOperation({ summary: '获取商品列表' })
+  @ApiOperation({ summary: '根据分类id或query关键词获取商品列表' })
+  @ApiQuery({
+    name: 'cid',
+    type: Number,
+    description: '分类id',
+    required: false
+  })
+  @ApiQuery({
+    name: 'keyword',
+    type: String,
+    description: '关键词',
+    required: false,
+  })
+  @ApiQuery({
+    name: 'isNew',
+    type: Boolean,
+    description: '是否为新品',
+    required: false,
+  })
+  @ApiQuery({
+    name: 'pageNum',
+    type: Number,
+    description: '当前页码',
+    required: false,
+  })
+  @ApiQuery({
+    name: 'pageSize',
+    type: Number,
+    description: '每页显示数据条数',
+    required: false,
+  })
   @ApiOkResponse({
     description: '商品列表',
     type: GetGoodsListResponse,
   })
   @Get()
-  findAll() {
-    return this.goodsService.findAll();
+  getGoodsList(@Query('cid') cid: number=-1,
+    @Query('keyword') keyword: string='',
+    @Query('isNew') isNew: boolean,
+    @Query('pageNum') pageNum: number=1,
+    @Query('pageSize') pageSize: number=15) {
+    return this.goodsService.getGoodsList({ cid, keyword, isNew, pageNum, pageSize });
   }
 
   @ApiOperation({

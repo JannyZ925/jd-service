@@ -10,14 +10,13 @@ import {
 } from '@nestjs/swagger';
 import { GetGoodsListResponse, GoodsDetail } from './entities/good.entity';
 import { UpdateGoodsDto } from './dto/update-good.dto';
-import { GetGoodsDto } from './dto/get-goods.dto';
 
 @ApiTags('商品')
 @Controller('goods')
 export class GoodsController {
   constructor(private readonly goodsService: GoodsService) { }
 
-  @ApiOperation({ summary: '根据分类id或query关键词获取商品列表' })
+  @ApiOperation({ summary: '分页获取商品列表' })
   @ApiQuery({
     name: 'cid',
     type: Number,
@@ -61,11 +60,31 @@ export class GoodsController {
     return this.goodsService.getGoodsList({ cid, keyword, isNew, pageNum, pageSize });
   }
 
+
+  @ApiOperation({
+    summary: '根据关键词搜索商品',
+  })
+  @ApiQuery({
+    name: 'keyword',
+    type: String,
+    description: '关键词',
+  })
+  @ApiOkResponse({
+    description: '商品列表',
+    type: GetGoodsListResponse,
+  })
+  @Get(':keyword')
+  getGoodsByKeyword(@Query('keyword') keyword: string) {
+    return this.goodsService.getGoodsByKeyword(keyword);
+  }
+
+
+
   @ApiOperation({
     summary: '根据id获取商品详情',
   })
   @ApiParam({
-    name: 'id',
+    name: 'goodsId',
     type: String,
     description: '商品id',
   })

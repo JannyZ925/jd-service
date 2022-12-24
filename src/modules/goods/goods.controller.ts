@@ -73,7 +73,7 @@ export class GoodsController {
     description: '商品列表',
     type: GetGoodsListResponse,
   })
-  @Get(':keyword')
+  @Get('/search')
   getGoodsByKeyword(@Query('keyword') keyword: string) {
     return this.goodsService.getGoodsByKeyword(keyword);
   }
@@ -94,7 +94,6 @@ export class GoodsController {
   })
   @Get('/detail')
   getGoodsDetailById(@Query('goodsId') goodsId: string) {
-    console.log('getGoodsDetailById')
     return this.goodsService.getGoodsDetailById(goodsId);
   }
 

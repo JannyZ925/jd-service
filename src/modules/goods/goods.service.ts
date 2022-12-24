@@ -29,6 +29,19 @@ export class GoodsService extends BaseService {
     return searchResult;
   }
 
+
+  // 根据商品id获取商品详情
+  async getGoodsDetailById(goodsId: string) {
+    console.log("goodsid:", goodsId);
+    const result = await this.store.get(`goods/goodsDetail.json`);
+    const data = JSON.parse(result.res.data.toString());
+    const goodsDetail = data.filter((item, index) => {
+      console.log("item.goodsId:", item.goodsId);
+      return item.goodsId === Number(goodsId)
+    })
+    return goodsDetail;
+  }
+
   findOne(id: number) {
     return {
       id,

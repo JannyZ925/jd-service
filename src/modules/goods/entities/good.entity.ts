@@ -1,26 +1,68 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class GoodsDetail {
+
+export class Pic {
   @ApiProperty()
-  id: string;
+  picsId: number;
 
   @ApiProperty()
-  imgUrl: string;
+  goodsId: number;
 
   @ApiProperty()
-  price: string;
+  picsBig: string;
+
+  @ApiProperty()
+  picsMid: string;
+
+  @ApiProperty()
+  picsSmall: string;
+}
+
+
+export class GetGoodsDetailResponse {
+  @ApiProperty()
+  goodsId: number;
 
   @ApiProperty()
   goodsName: string;
 
   @ApiProperty()
-  goodsDetail: string;
+  goodsPrice: number;
+
+  @ApiProperty()
+  goodsIntroduce: string;
+
+  @ApiProperty()
+  goodsCarriage: number;
+
+  @ApiProperty()
+  isStored: boolean;
+
+  @ApiProperty()
+  pics: Pic[];
+}
+
+export class Goods {
+  @ApiProperty()
+  goodsId: number;
+
+  @ApiProperty()
+  catId: number;
+
+  @ApiProperty()
+  goodsName: string;
+
+  @ApiProperty()
+  goodsPrice: number;
+
+  @ApiProperty()
+  goodsSmallLogo: string;
+
+  @ApiProperty()
+  isNew: boolean;
 }
 
 export class GetGoodsListResponse {
   @ApiProperty()
-  list: GoodsDetail[];
-
-  @ApiProperty()
-  total: number;
+  list: Goods[];
 }

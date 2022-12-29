@@ -2,7 +2,10 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class User {
   @ApiProperty()
-  id: string;
+  phone: string;
+
+  @ApiProperty()
+  password: string;
 
   @ApiProperty()
   collectedStoreCount: string;

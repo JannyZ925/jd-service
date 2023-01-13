@@ -125,6 +125,34 @@ export class UserService extends BaseService {
     return result;
   }
 
+
+  // 加入购物车
+  async addToCart({ user, goods }) {
+    const userData = await this.store.get(`user.json`);
+    const userArray = JSON.parse(userData.res.data.toString());
+    let result;
+    userArray.forEach((userItem) => {
+      if (userItem.phone === user.phone) {
+        if (userItem.hasOwnProperty('cart')) {
+          userItem.cart.forEach((cartItem, index) => {
+            if(cartItem.goodsId === Number(goods.goodsId)) {
+              goods.goodsCount = cartItem.goodsCount + 1;
+              userItem.cart.splice(index, 1);
+            }
+          });
+          userItem.cart.unshift(goods);
+          result = userItem;
+        } else {
+          userItem.cart = [goods];
+          result = userItem;
+        }
+      }
+      // 更新oss数据
+      this.store.put(`user.json`, userArray);
+    });
+    return result;
+  }
+
   findOne(id: number) {
     return {
       id,

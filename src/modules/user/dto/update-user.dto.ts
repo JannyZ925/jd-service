@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { CreateUserDto } from './create-user.dto';
-import { Goods } from '../../goods/entities/good.entity'
 
 export class UpdateUserDto {
     @ApiProperty()
@@ -8,4 +7,34 @@ export class UpdateUserDto {
 
     @ApiProperty()
     goodsId: Number;
+}
+
+
+export class CartItem {
+    @ApiProperty()
+    goodsId: number;
+
+    @ApiProperty()
+    goodsName: string;
+
+    @ApiProperty()
+    goodsPrice: number;
+
+    @ApiProperty()
+    goodsSmallLogo: string;
+
+    @ApiProperty()
+    goodsCount: number;
+
+    @ApiProperty()
+    goodsState: boolean;
+}
+
+
+export class AddToCartDto {
+    @ApiProperty()
+    user: CreateUserDto;
+    
+    @ApiProperty()
+    goods: CartItem
 }

@@ -2,7 +2,7 @@ import { Controller, Get, Query, Param, Post, Put, Body, Delete } from '@nestjs/
 import { UserService } from './user.service';
 import { ApiOkResponse, ApiOperation, ApiTags, ApiQuery, ApiBody } from '@nestjs/swagger';
 import { User } from './entities/user.entity';
-import { UpdateUserDto, AddToCartDto } from './dto/update-user.dto';
+import { UpdateUserDto, UpdateCartDto } from './dto/update-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 
 
@@ -73,7 +73,7 @@ export class UserController {
 
   @ApiOperation({ summary: '添加商品到购物车' })
   @ApiBody({
-    type: UpdateUserDto,
+    type: UpdateCartDto,
     description: '用户和商品信息',
   })
   @ApiOkResponse({
@@ -81,18 +81,50 @@ export class UserController {
     type: String,
   })
   @Put('/addToCart')
-  addToCart(@Body() userInfo: AddToCartDto) {
+  addToCart(@Body() userInfo: UpdateCartDto) {
     return this.userService.addToCart(userInfo);
   }
 
 
-  @ApiOperation({ summary: '获取用户详情' })
-  @ApiOkResponse({
-    description: '用户详情',
-    type: User,
+  @ApiOperation({ summary: '修改购物车中商品数量' })
+  @ApiBody({
+    type: UpdateCartDto,
+    description: '用户和商品信息',
   })
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  @ApiOkResponse({
+    description: '响应信息',
+    type: String,
+  })
+  @Put('/updateGoodsCount')
+  updateGoodsCountInCart(@Body() userInfo: UpdateCartDto) {
+    return this.userService.updateGoodsCountInCart(userInfo);
+  }
+
+  @ApiOperation({ summary: '修改购物车中商品选中状态' })
+  @ApiBody({
+    type: UpdateCartDto,
+    description: '用户和商品信息',
+  })
+  @ApiOkResponse({
+    description: '响应信息',
+    type: String,
+  })
+  @Put('/updateGoodsState')
+  updateGoodsStateInCart(@Body() userInfo: UpdateCartDto) {
+    return this.userService.updateGoodsStateInCart(userInfo);
+  }
+
+  @ApiOperation({ summary: '修改购物车中商品的全选状态' })
+  @ApiBody({
+    type: CreateUserDto,
+    description: '用户信息',
+  })
+  @ApiOkResponse({
+    description: '响应信息',
+    type: String,
+  })
+  @Put('/updateAllGoodsState')
+  updateAllGoodsStateInCart(@Body() user: CreateUserDto) {
+    return this.userService.updateAllGoodsStateInCart(user);
   }
 }

@@ -153,13 +153,64 @@ export class UserService extends BaseService {
     return result;
   }
 
-  findOne(id: number) {
-    return {
-      id,
-      collectedStoreCount: 14,
-      collectedGoodsCount: 54,
-      followingGoods: 71,
-      footPrint: 1095,
-    };
+
+  // 修改购物车中商品数量
+  async updateGoodsCountInCart({ user, goods }) {
+    const userData = await this.store.get(`user.json`);
+    const userArray = JSON.parse(userData.res.data.toString());
+    let result;
+    userArray.forEach((userItem) => {
+      if (userItem.phone === user.phone) {
+          userItem.cart.forEach((cartItem, index) => {
+            if(cartItem.goodsId === Number(goods.goodsId)) {
+              cartItem.goodsCount = goods.goodsCount
+            }
+          });
+          result = userItem;
+      }
+      // 更新oss数据
+      this.store.put(`user.json`, userArray);
+    });
+    return result;
+  }
+
+
+  // 修改购物车中商品状态
+  async updateGoodsStateInCart({ user, goods }) {
+    const userData = await this.store.get(`user.json`);
+    const userArray = JSON.parse(userData.res.data.toString());
+    let result;
+    userArray.forEach((userItem) => {
+      if (userItem.phone === user.phone) {
+        userItem.cart.forEach((cartItem, index) => {
+          if(cartItem.goodsId === Number(goods.goodsId)) {
+            cartItem.goodsState = goods.goodsState;
+          }
+        });
+        result = userItem
+      }
+      // 更新oss数据
+      this.store.put(`user.json`, userArray);
+    });
+    return result;
+  }
+
+
+  // 修改购物车中商品的全选状态
+  async updateAllGoodsStateInCart(user) {
+    const userData = await this.store.get(`user.json`);
+    const userArray = JSON.parse(userData.res.data.toString());
+    let result;
+    userArray.forEach((userItem) => {
+      if (userItem.phone === user.phone) {
+        userItem.cart.forEach(cartItem => {
+          cartItem.goodsState = !cartItem.goodsState
+        });
+        result = userItem;
+      }
+      // 更新oss数据
+      this.store.put(`user.json`, userArray);
+    });
+    return result;
   }
 }

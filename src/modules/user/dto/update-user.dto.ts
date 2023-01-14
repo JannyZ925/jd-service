@@ -31,7 +31,7 @@ export class CartItem {
 }
 
 
-export class AddToCartDto {
+export class UpdateCartDto {
     @ApiProperty()
     user: CreateUserDto;
     

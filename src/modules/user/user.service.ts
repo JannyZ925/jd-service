@@ -55,7 +55,7 @@ export class UserService extends BaseService {
       // 将当前商品信息加入用户的商品收藏数组
       if (item.phone === user.phone) {
         if (item.hasOwnProperty('storedGoods')) {
-          item.storedGoods.push(goods);
+          item.storedGoods.unshift(goods);
           result = item;
         } else {
           item.storedGoods = [goods];

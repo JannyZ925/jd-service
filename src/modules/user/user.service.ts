@@ -62,9 +62,9 @@ export class UserService extends BaseService {
           result = item;
         }
       }
-      // 更新oss数据
-      this.store.put(`user.json`, userArray);
     });
+    // 更新oss数据
+    this.store.put(`user.json`, userArray);
     return result;
   }
 
@@ -83,9 +83,8 @@ export class UserService extends BaseService {
           }
         });
       }
-      // 更新oss数据
-      this.store.put(`user.json`, userArray);
     });
+    this.store.put(`user.json`, userArray);
     return result;
   }
 
@@ -119,9 +118,8 @@ export class UserService extends BaseService {
           result = userItem;
         }
       }
-      // 更新oss数据
-      this.store.put(`user.json`, userArray);
     });
+    this.store.put(`user.json`, userArray);
     return result;
   }
 
@@ -147,9 +145,8 @@ export class UserService extends BaseService {
           result = userItem;
         }
       }
-      // 更新oss数据
-      this.store.put(`user.json`, userArray);
     });
+    this.store.put(`user.json`, userArray);
     return result;
   }
 
@@ -168,9 +165,8 @@ export class UserService extends BaseService {
           });
           result = userItem;
       }
-      // 更新oss数据
-      this.store.put(`user.json`, userArray);
     });
+    this.store.put(`user.json`, userArray);
     return result;
   }
 
@@ -189,9 +185,8 @@ export class UserService extends BaseService {
         });
         result = userItem
       }
-      // 更新oss数据
-      this.store.put(`user.json`, userArray);
     });
+    this.store.put(`user.json`, userArray);
     return result;
   }
 
@@ -208,9 +203,24 @@ export class UserService extends BaseService {
         });
         result = userItem;
       }
-      // 更新oss数据
-      this.store.put(`user.json`, userArray);
     });
+    this.store.put(`user.json`, userArray);
+    return result;
+  }
+
+
+  // 修改用户的收货地址
+  async updateShippingAddress({ user, address }) {
+    const userData = await this.store.get(`user.json`);
+    const userArray = JSON.parse(userData.res.data.toString());
+    let result;
+    userArray.forEach((userItem) => {
+      if (userItem.phone === user.phone) {
+        userItem.shippingAddress = address
+        result = userItem;
+      }
+    });
+    this.store.put(`user.json`, userArray);
     return result;
   }
 }

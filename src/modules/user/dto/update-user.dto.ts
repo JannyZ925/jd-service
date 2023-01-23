@@ -38,3 +38,22 @@ export class UpdateCartDto {
     @ApiProperty()
     goods: CartItem
 }
+
+export class Address {
+    @ApiProperty()
+    userName: string;
+
+    @ApiProperty()
+    telNumber: string;
+    
+    @ApiProperty()
+    addressStr: string;
+}
+
+export class UpdateAddressDto {
+    @ApiProperty()
+    user: CreateUserDto;
+    
+    @ApiProperty()
+    address: Address;
+}

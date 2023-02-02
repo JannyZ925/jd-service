@@ -192,14 +192,14 @@ export class UserService extends BaseService {
 
 
   // 修改购物车中商品的全选状态
-  async updateAllGoodsStateInCart(user) {
+  async updateAllGoodsStateInCart({ user, isAllChecked}) {
     const userData = await this.store.get(`user.json`);
     const userArray = JSON.parse(userData.res.data.toString());
     let result;
     userArray.forEach((userItem) => {
       if (userItem.phone === user.phone) {
         userItem.cart.forEach(cartItem => {
-          cartItem.goodsState = !cartItem.goodsState
+          cartItem.goodsState = !isAllChecked
         });
         result = userItem;
       }

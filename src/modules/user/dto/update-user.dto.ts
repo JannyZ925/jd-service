@@ -39,6 +39,14 @@ export class UpdateCartDto {
     goods: CartItem
 }
 
+export class updateAllGoodsStateDto {
+    @ApiProperty()
+    user: CreateUserDto;
+    
+    @ApiProperty()
+    isAllChecked: Boolean
+}
+
 export class Address {
     @ApiProperty()
     userName: string;

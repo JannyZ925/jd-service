@@ -2,7 +2,7 @@ import { Controller, Get, Query, Param, Post, Put, Body, Delete } from '@nestjs/
 import { UserService } from './user.service';
 import { ApiOkResponse, ApiOperation, ApiTags, ApiQuery, ApiBody } from '@nestjs/swagger';
 import { User } from './entities/user.entity';
-import { UpdateUserDto, UpdateCartDto, UpdateAddressDto } from './dto/update-user.dto';
+import { UpdateUserDto, UpdateCartDto, UpdateAddressDto, updateAllGoodsStateDto } from './dto/update-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 
 
@@ -124,8 +124,8 @@ export class UserController {
     type: String,
   })
   @Put('/updateAllGoodsState')
-  updateAllGoodsStateInCart(@Body() user: CreateUserDto) {
-    return this.userService.updateAllGoodsStateInCart(user);
+  updateAllGoodsStateInCart(@Body() userInfo: updateAllGoodsStateDto, ) {
+    return this.userService.updateAllGoodsStateInCart(userInfo);
   }
 
   @ApiOperation({ summary: '修改用户的收货地址' })

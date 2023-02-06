@@ -223,4 +223,23 @@ export class UserService extends BaseService {
     this.store.put(`user.json`, userArray);
     return result;
   }
+
+
+  // 修改用户的账户余额
+  async updateSurplus({ user, money }) {
+    const userData = await this.store.get(`user.json`);
+    const userArray = JSON.parse(userData.res.data.toString());
+    let result;
+    userArray.forEach((userItem) => {
+      if (userItem.phone === user.phone) {
+        if(userItem.surplus === null || userItem.surplus === undefined) {
+          userItem.surplus = 0
+        }        
+        userItem.surplus += Number(money)
+        result = userItem;
+      }
+    });
+    this.store.put(`user.json`, userArray);
+    return result;
+  }
 }

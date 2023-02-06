@@ -65,3 +65,12 @@ export class UpdateAddressDto {
     @ApiProperty()
     address: Address;
 }
+
+
+export class UpdateSurplusDto {
+    @ApiProperty()
+    user: CreateUserDto;
+    
+    @ApiProperty()
+    money: Number;
+}

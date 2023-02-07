@@ -19,6 +19,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   await app.listen(PORT);
-  console.log(`your app is running at http://localhost:${PORT}`);
+  console.log(`your app is running at https://blog.cellerchan.top:${PORT}`);
 }
 bootstrap();

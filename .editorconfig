@@ -1,0 +1,9 @@
+root = true # 声明当前为顶层配置文件，则编辑器不会再往上查找 editorConfig
+
+[*]
+charset = utf-8 # 字符串编码
+end_of_line = lf #换行符
+insert_final_newline = true # 末行空行
+indent_style = tab  # 缩进方式
+indent_size = 2 # 缩进step 使用 tab 时如果没有声明tab_width将会使用此属性，如果都声明则使用 tab_width
+tab_width = 2 # tab step

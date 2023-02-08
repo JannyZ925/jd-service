@@ -1,0 +1,31 @@
+name: 部署文件到服务器
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+
+
+    - name: Install dependencies
+      run: npm install pnpm -g && pnpm install
+
+    - name: Build
+      run: pnpm build
+
+    - name: Deploy to Server
+      uses: lexmin0412/ssh-deploy@master
+      with: # 以下为参数
+        USERNAME: ${{ secrets.DEPLOY_USER }}
+        PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+        HOST: ${{ secrets.DEPLOY_HOST }}
+        SOURCE: dist
+        TARGET: /cellerchan.top/backend/jd-serivce/dist
+        AFTER_COMMAND: cd /cellerchan.top && pm2 start all

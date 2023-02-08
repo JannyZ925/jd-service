@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { BaseService } from 'src/shared/services/base.service';
+import { nanoid } from 'nanoid';
 
 @Injectable()
 export class UserService extends BaseService {
@@ -249,6 +250,7 @@ export class UserService extends BaseService {
     const userData = await this.store.get(`user.json`);
     const userArray = JSON.parse(userData.res.data.toString());
     let result;
+    order.orderId = nanoid();
     userArray.forEach((userItem) => {
       if (userItem.phone === user.phone) {
         if (userItem.hasOwnProperty('orders')) {

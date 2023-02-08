@@ -78,9 +78,6 @@ export class UpdateSurplusDto {
 
 export class Order {
     @ApiProperty()
-    orderId: String;
-
-    @ApiProperty()
     orderStatus: Number;
 
     @ApiProperty()

@@ -242,4 +242,26 @@ export class UserService extends BaseService {
     this.store.put(`user.json`, userArray);
     return result;
   }
+
+
+  // 添加订单
+  async addOrder({ user, order }) {
+    const userData = await this.store.get(`user.json`);
+    const userArray = JSON.parse(userData.res.data.toString());
+    let result;
+    userArray.forEach((userItem) => {
+      if (userItem.phone === user.phone) {
+        if (userItem.hasOwnProperty('orders')) {
+          userItem.orders.unshift(order);
+          userItem.surplus -= order.totalPrice;
+          result = userItem;
+        } else {
+          userItem.orders = [order];
+          result = userItem;
+        }
+      }
+    });
+    this.store.put(`user.json`, userArray);
+    return result;
+  }
 }

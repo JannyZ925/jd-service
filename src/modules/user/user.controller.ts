@@ -2,7 +2,7 @@ import { Controller, Get, Query, Param, Post, Put, Body, Delete } from '@nestjs/
 import { UserService } from './user.service';
 import { ApiOkResponse, ApiOperation, ApiTags, ApiQuery, ApiBody } from '@nestjs/swagger';
 import { User } from './entities/user.entity';
-import { UpdateUserDto, UpdateCartDto, UpdateAddressDto, updateAllGoodsStateDto, UpdateSurplusDto } from './dto/update-user.dto';
+import { UpdateUserDto, UpdateCartDto, UpdateAddressDto, updateAllGoodsStateDto, UpdateSurplusDto, AddOrderDto } from './dto/update-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 
 
@@ -116,7 +116,7 @@ export class UserController {
 
   @ApiOperation({ summary: '修改购物车中商品的全选状态' })
   @ApiBody({
-    type: CreateUserDto,
+    type: updateAllGoodsStateDto,
     description: '用户信息',
   })
   @ApiOkResponse({
@@ -130,7 +130,7 @@ export class UserController {
 
   @ApiOperation({ summary: '修改用户的收货地址' })
   @ApiBody({
-    type: CreateUserDto,
+    type: UpdateAddressDto,
     description: '用户信息',
   })
   @ApiOkResponse({
@@ -156,4 +156,21 @@ export class UserController {
   updateSurplus(@Body() userInfo: UpdateSurplusDto) {
     return this.userService.updateSurplus(userInfo);
   }
+
+
+  @ApiOperation({ summary: '添加订单' })
+  @ApiBody({
+    type: AddOrderDto,
+    description: '用户信息',
+  })
+  @ApiOkResponse({
+    description: '响应信息',
+    type: String,
+  })
+  @Put('/addOrder')
+  addOrder(@Body() userInfo: AddOrderDto) {
+    return this.userService.addOrder(userInfo);
+  }
 }
+
+

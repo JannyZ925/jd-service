@@ -74,3 +74,26 @@ export class UpdateSurplusDto {
     @ApiProperty()
     money: Number;
 }
+
+
+export class Order {
+    @ApiProperty()
+    orderId: String;
+
+    @ApiProperty()
+    orderStatus: Number;
+
+    @ApiProperty()
+    goodsList: CartItem[];
+
+    @ApiProperty()
+    totalPrice: Number;
+}
+
+export class AddOrderDto {
+    @ApiProperty()
+    user: CreateUserDto;
+
+    @ApiProperty()
+    order: Order
+}
